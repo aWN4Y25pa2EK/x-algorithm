@@ -28,6 +28,9 @@ fn should_drop(reason: &Option<FilteredReason>) -> bool {
             matches!(safety_result.action, Action::Drop(_))
         }
         Some(_) => true,
-        None => false,
+        None => {
+            log::warn!("VF result missing - content passing without safety verification");
+            false
+        }
     }
 }
